@@ -108,5 +108,14 @@ public class FoodStack {
     // Return the maximum storage capacity
     public int getCapacity() {
         return CAPACITY;
+        
+        
     }
+    public void displayTo(javax.swing.JTextArea outputArea) {
+
+    for (int i = top; i >= 0; i--) {
+        outputArea.append(items[i].toString() + "\n");
+    }
+}
+    
 }
