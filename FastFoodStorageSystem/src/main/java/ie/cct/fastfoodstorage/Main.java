@@ -53,5 +53,56 @@ public class Main {
         System.out.println("Maximum capacity: " + storage.getCapacity());
 
         System.out.println("\n=== TEST COMPLETED ===");
+        
+                // Test 1: Try to exceed the storage capacity
+        System.out.println("\n=== CAPACITY TEST ===");
+
+        FoodStack fullStorage = new FoodStack();
+
+        for (int i = 0; i < 8; i++) {
+            fullStorage.add(new FoodItem(
+                    FoodType.BURGER,
+                    200,
+                    LocalDate.now().plusDays(3)
+            ));
+        }
+
+        System.out.println("Items stored: " + fullStorage.size());
+        System.out.println("Storage full: " + fullStorage.isFull());
+
+        try {
+            fullStorage.add(new FoodItem(
+                    FoodType.PIZZA,
+                    300,
+                    LocalDate.now().plusDays(5)
+            ));
+        } catch (IllegalStateException e) {
+            System.out.println("Expected error: " + e.getMessage());
+        }
+
+        // Test 2: Try to remove from an empty storage
+        System.out.println("\n=== EMPTY STORAGE TEST ===");
+
+        FoodStack emptyStorage = new FoodStack();
+
+        try {
+            emptyStorage.remove();
+        } catch (IllegalStateException e) {
+            System.out.println("Expected error: " + e.getMessage());
+        }
+
+        // Test 3: Try to create a food item with invalid weight
+        System.out.println("\n=== INVALID WEIGHT TEST ===");
+
+        try {
+            new FoodItem(
+                    FoodType.BURGER,
+                    -100,
+                    LocalDate.now().plusDays(3)
+            );
+        } catch (IllegalArgumentException e) {
+            System.out.println("Expected error: " + e.getMessage());
+        }
     }
+    
 }
